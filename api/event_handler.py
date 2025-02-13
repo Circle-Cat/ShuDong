@@ -1,4 +1,5 @@
 import uuid
+from static.constants import VOTE_THRESHOLD, VOTE_APPROPRIATE, VOTE_INAPPROPRIATE, VOTE_NSFW
 
 from api.messages import (
     create_card,
@@ -55,7 +56,7 @@ def event_handler(event) -> Mapping[str, Any]:
                 user_id = event["user"]["name"]
 
                 # Remove inappropriate post by vote
-                if count <= -30:
+                if count <= VOTE_THRESHOLD:
                     message = deleted_message(shudong_id)
                 else:
                     content = event["action"]["parameters"][1]["value"]
@@ -68,7 +69,7 @@ def event_handler(event) -> Mapping[str, Any]:
                     match action:
                         case "appropriate":
                             # Appropriate butten pressed
-                            voter[user_id] = 1
+                            voter[user_id] = VOTE_APPROPRIATE
                             message = create_card(
                                 shudong_id,
                                 content,
@@ -78,7 +79,7 @@ def event_handler(event) -> Mapping[str, Any]:
                             )
                         case "inappropriate":
                             # Inappropriate button pressed
-                            voter[user_id] = -1
+                            voter[user_id] = VOTE_INAPPROPRIATE
                             message = create_card(
                                 shudong_id,
                                 content,
@@ -88,7 +89,7 @@ def event_handler(event) -> Mapping[str, Any]:
                             )
                         case "nsfw":
                             # NSFW button pressed
-                            voter[user_id] = -5
+                            voter[user_id] = VOTE_NSFW
                             message = create_card(
                                 shudong_id,
                                 content,
