@@ -5,6 +5,7 @@ py_library(
     srcs = ["event_handler.py", "messages.py"],
     deps = [
         "@pypi//flask",
+        "//static:static_constants",
     ],
     visibility = ["//visibility:public"],
 )
