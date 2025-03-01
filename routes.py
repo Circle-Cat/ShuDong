@@ -1,8 +1,10 @@
 from api import event_handler
 from typing import Any, Mapping
-from flask import Flask, request, json
+from flask import Flask, request
+
 
 app = Flask(__name__)
+
 
 @app.route("/", methods=["POST"])
 def post() -> Mapping[str, Any]:
@@ -17,4 +19,3 @@ def post() -> Mapping[str, Any]:
     event = request.get_json()
 
     return event_handler.event_handler(event)
-

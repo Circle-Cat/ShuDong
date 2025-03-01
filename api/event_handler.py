@@ -1,5 +1,10 @@
 import uuid
-from static.constants import VOTE_THRESHOLD, VOTE_APPROPRIATE, VOTE_INAPPROPRIATE, VOTE_NSFW
+from static.constants import (
+    VOTE_THRESHOLD,
+    VOTE_APPROPRIATE,
+    VOTE_INAPPROPRIATE,
+    VOTE_NSFW,
+)
 
 from api.messages import (
     create_card,
@@ -12,7 +17,6 @@ from typing import Any, Mapping
 
 
 def event_handler(event) -> Mapping[str, Any]:
-
     match event["type"]:
         case "ADDED_TO_SPACE":
             # Create new Shudong session for when added to a space
@@ -62,7 +66,7 @@ def event_handler(event) -> Mapping[str, Any]:
                     content = event["action"]["parameters"][1]["value"]
 
                     if user_id in voter:
-                        vote_recovery = - int(voter[user_id])
+                        vote_recovery = -int(voter[user_id])
                     else:
                         vote_recovery = 0
 
