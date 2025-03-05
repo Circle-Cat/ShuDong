@@ -12,3 +12,11 @@ py_library(
         "@pypi//flask",
     ],
 )
+
+py_test(
+    name = "event_handler_test",
+    srcs = ["event_handler_test.py"],
+    deps = [
+        "//api",
+    ],
+)
